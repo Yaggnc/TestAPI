@@ -7,15 +7,23 @@ namespace TestApı.Controllers
     [ApiController]
     public class TestClassController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<List<TestClass>>> Get()
-        {
-            var testObjects = new List<TestClass> 
+        private static List<TestClass> testObjects = new List<TestClass> 
             {
                 new TestClass{Id=1,FirstName="ddfshds",LastName="dshfhf"},
-                new TestClass{Id=2,FirstName="trutut",LastName="kekekekek"}            
-            };
+                new TestClass{Id=2,FirstName="trutut",LastName="kekekekek"}                       
+        };
 
+
+        [HttpGet]
+        public async Task<ActionResult<List<TestClass>>> Get()
+        {            
+            return Ok(testObjects);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<TestClass>>> AddTestClass(TestClass testClass)
+        {
+            testObjects.Add(testClass);
             return Ok(testObjects);
         }
     }
